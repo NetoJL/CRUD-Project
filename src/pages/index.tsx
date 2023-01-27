@@ -11,6 +11,14 @@ export default function Home() {
     new Customer('Carlos', 33, '4'),
   ]
 
+  function selectedCustomer(customer: Customer) {
+    alert(customer.name)
+  }
+
+  function deletedCustomer(customer: Customer) {
+    alert('Delete ' + customer.name)
+  }
+
   return (
     <div className='
     flex justify-center items-center h-screen
@@ -18,7 +26,7 @@ export default function Home() {
     text-white
     '>
       <Layout title="Sign up">
-        <Table customers={customers}></Table>
+        <Table customers={customers} selectedCustomer={selectedCustomer} deletedCustomer={deletedCustomer}></Table>
       </Layout>
     </div>
   )
