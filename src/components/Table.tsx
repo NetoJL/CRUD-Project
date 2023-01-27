@@ -1,10 +1,15 @@
 import Customer from "@/core/Customer"
+import { EditIcon, TrashIcon } from "./Icons"
 
 interface TableProps {
     customers: Customer[]
+    selectedCustomer?: (customer: Customer) => void
+    deletedCustomer?: (customer: Customer) => void
 }
 
 export default function Table(props: TableProps) {
+
+    const showEdit = props.deletedCustomer || props.selectedCustomer
 
     function renderHeader() {
         return (
@@ -12,6 +17,7 @@ export default function Table(props: TableProps) {
                 <th className="text-left p-4">Code</th>
                 <th className="text-left p-4">Name</th>
                 <th className="text-left p-4">Age</th>
+                {showEdit ? <th className="p-4">Edit</th> : false}
             </tr>
         )
 
@@ -24,9 +30,39 @@ export default function Table(props: TableProps) {
                     <td className="text-left p-4">{customer.id}</td>
                     <td className="text-left p-4">{customer.name}</td>
                     <td className="text-left p-4">{customer.age}</td>
+                    {showEdit ? renderEdit(customer) : false}
                 </tr>
             )
         })
+    }
+
+    function renderEdit(customer: Customer) {
+        return (
+            <td className="flex justify-center">
+                {props.selectedCustomer ? (
+                    <button onClick={() => props.selectedCustomer?.(customer)} className="
+                        flex justify-center items-center
+                        text-green-600 
+                        rounded-full hover:bg-purple-50
+                        p-2 m-1
+                ">
+                        {EditIcon}
+                    </button>
+                ) : false}
+
+                {props.selectedCustomer ? (
+                    <button onClick={() => props.deletedCustomer?.(customer)} className="
+                        flex justify-center items-center
+                        text-red-500 
+                        rounded-full hover:bg-purple-50
+                        p-2 m-1
+                ">
+                        {TrashIcon}
+                    </button>
+                ) : false}
+                
+            </td>
+        )
     }
 
     return (
