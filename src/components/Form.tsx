@@ -1,5 +1,6 @@
 import Customer from "@/core/Customer";
 import { useState } from "react";
+import Button from "./Button";
 import Input from "./Input";
 
 interface FormProps {
@@ -9,16 +10,41 @@ interface FormProps {
 export default function Form(props: FormProps) {
 
     const id = props.customer?.id
-    const [name, setName] = useState('')
+    const [name, setName] = useState(props.customer?.name ?? '')
+    const [age, setAge] = useState(props.customer?.age ?? 0)
 
     return (
-        <div>
+        <div className="bg-gray-300 p-5 rounded-md">
             {id ? (
-                <Input text="Code" value="Test"/>
-                ) : false
+                <Input
+                    readOnly
+                    text="Code"
+                    value={id}
+                    className="mb-5"
+                />
+            ) : false
             }
-            <Input text="Name" value="Marcos"/>
-            <Input text="Age" inputType="number" value="20"/>
+            <Input
+                text="Name"
+                value={name}
+                onChange={setName}
+                className="mb-5"
+            />
+            <Input
+                text="Age"
+                value={age}
+                inputType="number"
+                onChange={setAge}
+            />
+            <div className="flex justify-end mt-7">
+                <Button buttonColor="blue" className="mr-2">
+                    {id ? 'Update' : 'Save'}
+                </Button>
+                <Button buttonColor="gray">
+                    Cancel
+                </Button>
+            </div>
+
         </div>
     )
 }
