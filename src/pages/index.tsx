@@ -1,6 +1,7 @@
 import Layout from "@/components/Layout";
 import Customer from "@/core/Customer";
 import Table from "@/components/Table"
+import Button from "@/components/Button";
 
 export default function Home() {
 
@@ -20,13 +21,21 @@ export default function Home() {
   }
 
   return (
-    <div className='
+    <div className={`
     flex justify-center items-center h-screen
     bg-gradient-to-r from-blue-500 to-purple-500
     text-white
-    '>
+    `}>
       <Layout title="Sign up">
-        <Table customers={customers} selectedCustomer={selectedCustomer} deletedCustomer={deletedCustomer}></Table>
+        <div className="flex justify-end">
+          <Button buttonColor="green" className="mb-4">
+            New Customer
+          </Button>
+        </div>
+        <Table
+          customers={customers}
+          selectedCustomer={selectedCustomer}
+          deletedCustomer={deletedCustomer} />
       </Layout>
     </div>
   )
