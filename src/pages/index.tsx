@@ -2,6 +2,7 @@ import Layout from "@/components/Layout";
 import Customer from "@/core/Customer";
 import Table from "@/components/Table"
 import Button from "@/components/Button";
+import Form from "@/components/Form";
 
 export default function Home() {
 
@@ -32,10 +33,11 @@ export default function Home() {
             New Customer
           </Button>
         </div>
-        <Table
+        {/* <Table
           customers={customers}
           selectedCustomer={selectedCustomer}
-          deletedCustomer={deletedCustomer} />
+          deletedCustomer={deletedCustomer} /> */}
+          <Form customer={customers[3]}/>
       </Layout>
     </div>
   )
